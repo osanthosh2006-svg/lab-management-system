@@ -37,6 +37,11 @@ const start = async () => {
   app.listen(PORT, () => console.log(`[server] LabTrack API listening on port ${PORT}`));
 };
 
-start();
+if (require.main === module) {
+  start().catch((err) => {
+    console.error('[server] startup failed:', err.message);
+    process.exitCode = 1;
+  });
+}
 
 module.exports = app;
